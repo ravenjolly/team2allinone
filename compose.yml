@@ -1,0 +1,49 @@
+---
+version: "3.9"
+
+networks:
+  mccnetwork:
+    name: mccnetwork
+#    external: true
+
+
+
+services:
+  team2data:
+    build: ./team2project/.
+    image: team2data
+    ports:
+      - 8080:8080
+    environment:
+      - API_HOST=172.20.0.3:8081
+    networks:
+      - mccnetwork
+
+  team2auth:
+    build: ./team2project-auth/.
+    image: team2auth
+    ports:
+      - 8081:8081
+    environment:
+      - API_HOST=172.20.0.2:8080
+    networks:
+      - mccnetwork
+    depends_on:
+      - team2data
+
+  front_end:
+    build: ./team2foxreactday6/.
+    image: front_end
+    ports:
+      - 3000:80
+    networks:
+      - mccnetwork
+    depends_on:
+      - team2data
+      - team2auth
+
+
+
+
+
+
