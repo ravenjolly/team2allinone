@@ -1,10 +1,14 @@
 ---
-version: "3.9"
+version: "3"
+
 
 networks:
   mccnetwork:
-    name: mccnetwork
-#    external: true
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.20.0.0/24
 
 
 
@@ -12,22 +16,28 @@ services:
   team2data:
     build: ./team2project/.
     image: team2data
-    ports:
-      - 8080:8080
+    expose: 
+      - 8080
+#    ports:
+#      - 8080:8080
     environment:
-      - API_HOST=172.20.0.3:8081
+      - API_HOST=team2auth:8081
     networks:
-      - mccnetwork
+      mccnetwork:
+        ipv4_address: 172.20.0.2
 
   team2auth:
     build: ./team2project-auth/.
     image: team2auth
-    ports:
-      - 8081:8081
+    expose:
+      - 8081
+#    ports:
+#      - 8081:8081
     environment:
-      - API_HOST=172.20.0.2:8080
+      - API_HOST=team2data:8080
     networks:
-      - mccnetwork
+      mccnetwork:
+        ipv4_address: 172.20.0.3
     depends_on:
       - team2data
 
@@ -37,7 +47,8 @@ services:
     ports:
       - 3000:80
     networks:
-      - mccnetwork
+      mccnetwork:
+        ipv4_address: 172.20.0.4
     depends_on:
       - team2data
       - team2auth
