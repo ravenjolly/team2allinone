@@ -1,7 +1,6 @@
 ---
 version: "3"
 
-
 networks:
   mccnetwork:
     driver: bridge
@@ -10,13 +9,11 @@ networks:
       config:
         - subnet: 172.20.0.0/24
 
-
-
 services:
   team2data:
     build: ./team2project/.
-    image: team2data
-    expose: 
+    image: team2data:latest
+    expose:
       - 8080
 #    ports:
 #      - 8080:8080
@@ -28,7 +25,7 @@ services:
 
   team2auth:
     build: ./team2project-auth/.
-    image: team2auth
+    image: team2auth:latest
     expose:
       - 8081
 #    ports:
@@ -38,20 +35,21 @@ services:
     networks:
       mccnetwork:
         ipv4_address: 172.20.0.3
-    depends_on:
-      - team2data
+
 
   front_end:
     build: ./team2foxreactday6/.
-    image: front_end
+    image: front_end:latest
+    environment:
+      - API_HOST_ENV=team2data:8080
+      - AUTH_HOST_ENV=team2auth:8081
     ports:
       - 3000:80
     networks:
       mccnetwork:
         ipv4_address: 172.20.0.4
-    depends_on:
-      - team2data
-      - team2auth
+
+
 
 
 
