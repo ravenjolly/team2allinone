@@ -15,8 +15,8 @@ services:
     image: team2data:latest
     expose:
       - 8080
-#    ports:
-#      - 8080:8080
+    ports:
+      - 8080:8080
     environment:
       - API_HOST=team2auth:8081
     networks:
@@ -28,8 +28,8 @@ services:
     image: team2auth:latest
     expose:
       - 8081
-#    ports:
-#      - 8081:8081
+    ports:
+      - 8081:8081
     environment:
       - API_HOST=team2data:8080
     networks:
