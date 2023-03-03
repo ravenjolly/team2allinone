@@ -1,0 +1,9 @@
+[submodule "team2project"]
+	path = team2project
+	url = https://github.com/kogabean/team2project.git
+[submodule "team2project-auth"]
+	path = team2project-auth
+	url = https://github.com/kogabean/team2project-auth.git
+[submodule "team2foxreactday6"]
+	path = team2foxreactday6
+	url = https://github.com/ravenjolly/team2foxreactday6.git
