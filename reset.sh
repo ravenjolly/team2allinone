@@ -1,4 +1,4 @@
 #/bin/bash
-./stop_containers.sh
+./docker_stop.sh
 docker compose down
 docker system prune -af
