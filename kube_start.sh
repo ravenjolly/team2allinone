@@ -1,5 +1,14 @@
 #/bin/bash
 
+# Set terminal variables for minikube
+eval $(minikube -p minikube docker-env)
+
+# Load in built images
+minikube image load team2data:v1.0
+minikube image load team2auth:v1.0
+minikube image load team2frontend:v1.0
+
+# deploy applications
 kubectl create deployment team2data --image team2data:v1.0
 kubectl create deployment team2auth --image team2auth:v1.0
 kubectl create deployment team2frontend --image team2frontend:v1.0
