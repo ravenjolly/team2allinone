@@ -7,7 +7,6 @@ docker network rm docker_mccnetwork
 docker network create docker_mccnetwork --driver=bridge
 
 
-
 docker run -d --name docker_team2data --network docker_mccnetwork -p 8080:8080 --expose 8080 --env API_HOST=docker_team2auth:8081 --env DB_TYPE=hsqldb docker_team2data 
 docker run -d --name docker_team2auth --network docker_mccnetwork -p 8081:8081 --expose 8081 --env API_HOST=docker_team2data:8080 docker_team2auth
 #docker network connect docker_mccnetwork docker_team2data
