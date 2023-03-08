@@ -1,4 +1,4 @@
-docker stop docker_team2front_end
-docker stop docker_team2auth
-docker stop docker_team2data
-docker network rm docker_mccnetwork
+docker stop team2frontend
+docker stop team2auth
+docker stop team2data
+docker network rm mccnetwork
